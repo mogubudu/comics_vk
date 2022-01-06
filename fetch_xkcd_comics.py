@@ -15,6 +15,7 @@ def get_xkcd_random_comics():
     random_number = random.randint(1, last_comics_number)
     url = f'https://xkcd.com/{random_number}/info.0.json'
     response = requests.get(url)
+    response.raise_for_status()
     response = response.json()
     return response['img'], response['alt']
 

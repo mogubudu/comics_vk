@@ -17,6 +17,7 @@ def get_adress_vk_wall(group_id, token=None):
     }
 
     response = requests.get(url, params=params)
+    response.raise_for_status()
     return response.json()['response']['upload_url']
 
 
@@ -49,6 +50,7 @@ def vk_save_wall_photo(group_id, server, photo, hash_image, token=None):
     }
 
     response = requests.post(url, params=params)
+    response.raise_for_status()
     response = response.json()
     owner_id = response['response'][0]['owner_id']
     media_id = response['response'][0]['id']
