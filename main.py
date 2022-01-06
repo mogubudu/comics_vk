@@ -15,11 +15,11 @@ def get_filename(url):
     return filename
 
 
-def download_image(image_name, image_url, path_to_save='images/'):
+def download_image(image_name, image_url):
     response = requests.get(image_url)
     response.raise_for_status()
 
-    with open(f'{path_to_save}{image_name}', 'wb') as file:
+    with open(f'{image_name}', 'wb') as file:
         file.write(response.content)
 
 
@@ -122,7 +122,7 @@ def main():
     download_image(image_name, image_url)
     upload_url = get_adress_vk_wall(vk_token)
     server, photo, photo_hash = upload_photo_to_server(upload_url,
-                                                       f'images/{image_name}')
+                                                       image_name)
 
     owner_id, media_id = vk_save_wall_photo(server,
                                             photo,
@@ -130,7 +130,7 @@ def main():
                                             vk_token)
 
     public_comics_vk(image_title, owner_id, media_id, vk_token)
-    os.remove(f'images/{image_name}')
+    os.remove(image_name)
 
 
 if __name__ == '__main__':
