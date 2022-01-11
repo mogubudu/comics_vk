@@ -83,23 +83,25 @@ def main():
     vk_token = os.getenv('VK_ACCESS_TOKEN')
     group_id = os.getenv('VK_GROUP_ID')
 
-    image_url, image_title = get_random_comics()
-    image_name = get_filename(image_url)
+    try:
+        image_url, image_title = get_random_comics()
+        image_name = get_filename(image_url)
 
-    download_image(image_name, image_url)
-    upload_url = get_adress_vk_wall(group_id, vk_token)
-    server, photo, photo_hash = upload_photo_to_server(upload_url,
-                                                       image_name)
+        download_image(image_name, image_url)
+        upload_url = get_adress_vk_wall(group_id, vk_token)
+        server, photo, photo_hash = upload_photo_to_server(upload_url,
+                                                        image_name)
 
-    owner_id, media_id = vk_save_wall_photo(group_id,
-                                            server,
-                                            photo,
-                                            photo_hash,
-                                            vk_token)
+        owner_id, media_id = vk_save_wall_photo(group_id,
+                                                server,
+                                                photo,
+                                                photo_hash,
+                                                vk_token)
 
-    public_comics_vk(group_id, owner_id, media_id, vk_token, image_title)
+        public_comics_vk(group_id, owner_id, media_id, vk_token, image_title)
 
-    os.remove(image_name)
+    finally:
+        os.remove(image_name)
 
 
 if __name__ == '__main__':
