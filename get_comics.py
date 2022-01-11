@@ -6,7 +6,7 @@ from fetch_xkcd_comics import get_random_comics
 from file_handler import get_filename, download_image
 
 
-def get_adress_vk_wall(group_id, token=None):
+def get_adress_vk_wall(group_id, token):
     app_version = '5.131'
     method = 'photos.getWallUploadServer'
     url = f'https://api.vk.com/method/{method}'
@@ -35,7 +35,7 @@ def upload_photo_to_server(upload_url, path_to_photo):
         return server, photo, photo_hash
 
 
-def vk_save_wall_photo(group_id, server, photo, hash_image, token=None):
+def vk_save_wall_photo(group_id, server, photo, hash_image, token):
     method = 'photos.saveWallPhoto'
     app_version = '5.131'
     url = f'https://api.vk.com/method/{method}'
@@ -58,10 +58,10 @@ def vk_save_wall_photo(group_id, server, photo, hash_image, token=None):
 
 
 def public_comics_vk(group_id,
-                     image_title=None,
-                     owner_id=None,
-                     media_id=None,
-                     token=None):
+                     owner_id,
+                     media_id,
+                     token,
+                     image_title=None):
 
     method = 'wall.post'
     app_version = '5.131'
@@ -97,7 +97,7 @@ def main():
                                             photo_hash,
                                             vk_token)
 
-    public_comics_vk(group_id, image_title, owner_id, media_id, vk_token)
+    public_comics_vk(group_id, owner_id, media_id, vk_token, image_title)
 
     os.remove(image_name)
 
