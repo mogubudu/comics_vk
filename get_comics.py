@@ -29,9 +29,10 @@ def upload_photo_to_server(upload_url, path_to_photo):
         response = requests.post(upload_url, files=files)
         response.raise_for_status()
     
-    server = response.json()['server']
-    photo = response.json()['photo']
-    photo_hash = response.json()['hash']
+    response = response.json()
+    server = response['server']
+    photo = response['photo']
+    photo_hash = response['hash']
 
     return server, photo, photo_hash
 
