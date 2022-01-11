@@ -2,7 +2,7 @@ import os
 import requests
 
 from dotenv import load_dotenv
-from fetch_xkcd_comics import get_xkcd_random_comics
+from fetch_xkcd_comics import get_random_comics
 from file_handler import get_filename, download_image
 
 
@@ -83,7 +83,7 @@ def main():
     vk_token = os.getenv('VK_ACCESS_TOKEN')
     group_id = os.getenv('VK_GROUP_ID')
 
-    image_url, image_title = get_xkcd_random_comics()
+    image_url, image_title = get_random_comics()
     image_name = get_filename(image_url)
 
     download_image(image_name, image_url)
