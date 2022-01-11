@@ -72,7 +72,7 @@ def public_comics_vk(group_id,
         'owner_id': f'-{group_id}',
         'from_group': 1,
         'attachments': f'photo{owner_id}_{media_id}',
-        'message': f'{image_title}',
+        'message': image_title,
         'access_token': token,
         'v': app_version,
     }
