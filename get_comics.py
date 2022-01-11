@@ -76,8 +76,9 @@ def public_comics_vk(group_id,
         'access_token': token,
         'v': app_version,
     }
-
-    return requests.post(url, params=params)
+    response = requests.post(url, params=params)
+    response.raise_for_status()
+    return response
 
 
 def main():
