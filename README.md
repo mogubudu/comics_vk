@@ -28,8 +28,8 @@ pip install -r requirements.txt
 
 Пример заполненного файла .env:
 ```
-VK_CLIENT_ID = 'Ваш ID группы'
-VK_ACCESS_TOKEN = 'Ваш токен для работы с API VK'
+VK_CLIENT_ID='Ваш ID группы'
+VK_ACCESS_TOKEN='Ваш токен для работы с API VK'
 ```
 
 ### Структура файлов
