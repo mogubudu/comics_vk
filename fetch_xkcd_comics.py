@@ -18,11 +18,3 @@ def get_xkcd_random_comics():
     response.raise_for_status()
     response = response.json()
     return response['img'], response['alt']
-
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()

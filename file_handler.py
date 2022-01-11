@@ -18,11 +18,3 @@ def download_image(image_name, image_url):
 
     with open(f'{image_name}', 'wb') as file:
         file.write(response.content)
-
-
-def main():
-    pass
-
-
-if __name__ == '__main__':
-    main()
