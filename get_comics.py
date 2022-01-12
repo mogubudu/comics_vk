@@ -75,10 +75,10 @@ def save_vk_wall_photo(group_id, server, photo, photo_hash, token):
 
 
 def publish_vk_comics(group_id,
-                     owner_id,
-                     media_id,
-                     token,
-                     image_title=None):
+                      owner_id,
+                      media_id,
+                      token,
+                      image_title=None):
 
     method = 'wall.post'
     app_version = '5.131'
