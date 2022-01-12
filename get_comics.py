@@ -6,6 +6,17 @@ from fetch_xkcd_comics import get_random_comics
 from file_handler import get_filename, download_image
 
 
+class VkApiError(Exception):
+    pass
+
+
+def check_vk_response(response):
+    response = response.json()
+    if 'error' in response:
+        raise VkApiError(f"Error code is {response['error']['error_code']}. "
+                         f"{response['error']['error_msg']}")
+
+
 def get_adress_vk_wall(group_id, token):
     app_version = '5.131'
     method = 'photos.getWallUploadServer'
@@ -18,6 +29,7 @@ def get_adress_vk_wall(group_id, token):
 
     response = requests.get(url, params=params)
     response.raise_for_status()
+    check_vk_response(response)
     return response.json()['response']['upload_url']
 
 
@@ -28,7 +40,8 @@ def upload_photo_to_server(upload_url, path_to_photo):
         }
         response = requests.post(upload_url, files=files)
         response.raise_for_status()
-    
+        check_vk_response(response)
+
     response = response.json()
     server = response['server']
     photo = response['photo']
@@ -53,6 +66,8 @@ def vk_save_wall_photo(group_id, server, photo, hash_image, token):
 
     response = requests.post(url, params=params)
     response.raise_for_status()
+    check_vk_response(response)
+
     response = response.json()
     owner_id = response['response'][0]['owner_id']
     media_id = response['response'][0]['id']
@@ -78,6 +93,7 @@ def public_comics_vk(group_id,
     }
     response = requests.post(url, params=params)
     response.raise_for_status()
+    check_vk_response(response)
     return response
 
 
@@ -93,7 +109,7 @@ def main():
         download_image(image_name, image_url)
         upload_url = get_adress_vk_wall(group_id, vk_token)
         server, photo, photo_hash = upload_photo_to_server(upload_url,
-                                                        image_name)
+                                                           image_name)
 
         owner_id, media_id = vk_save_wall_photo(group_id,
                                                 server,
