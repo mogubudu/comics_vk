@@ -33,8 +33,8 @@ def get_adress_vk_wall(group_id, token):
     return response.json()['response']['upload_url']
 
 
-def upload_photo_to_server(upload_url, path_to_photo):
-    with open(path_to_photo, 'rb') as file:
+def upload_photo_to_server(upload_url, photo_path):
+    with open(photo_path, 'rb') as file:
         files = {
             'photo': file,
         }
@@ -50,7 +50,7 @@ def upload_photo_to_server(upload_url, path_to_photo):
     return server, photo, photo_hash
 
 
-def vk_save_wall_photo(group_id, server, photo, hash_image, token):
+def save_vk_wall_photo(group_id, server, photo, photo_hash, token):
     method = 'photos.saveWallPhoto'
     app_version = '5.131'
     url = f'https://api.vk.com/method/{method}'
@@ -58,7 +58,7 @@ def vk_save_wall_photo(group_id, server, photo, hash_image, token):
         'group_id': group_id,
         'server': server,
         'photo': photo,
-        'hash': hash_image,
+        'hash': photo_hash,
         'access_token': token,
         'group_id': group_id,
         'v': app_version,
@@ -74,7 +74,7 @@ def vk_save_wall_photo(group_id, server, photo, hash_image, token):
     return owner_id, media_id
 
 
-def public_comics_vk(group_id,
+def publish_vk_comics(group_id,
                      owner_id,
                      media_id,
                      token,
@@ -111,13 +111,13 @@ def main():
         server, photo, photo_hash = upload_photo_to_server(upload_url,
                                                            image_name)
 
-        owner_id, media_id = vk_save_wall_photo(group_id,
+        owner_id, media_id = save_vk_wall_photo(group_id,
                                                 server,
                                                 photo,
                                                 photo_hash,
                                                 vk_token)
 
-        public_comics_vk(group_id, owner_id, media_id, vk_token, image_title)
+        publish_vk_comics(group_id, owner_id, media_id, vk_token, image_title)
 
     finally:
         os.remove(image_name)
