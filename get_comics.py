@@ -17,7 +17,7 @@ def check_vk_response(response):
                          f"{response['error']['error_msg']}")
 
 
-def get_adress_vk_wall(group_id, token):
+def get_address_vk_wall(group_id, token):
     app_version = '5.131'
     method = 'photos.getWallUploadServer'
     url = f'https://api.vk.com/method/{method}'
@@ -107,7 +107,7 @@ def main():
         image_name = get_filename(image_url)
 
         download_image(image_name, image_url)
-        upload_url = get_adress_vk_wall(group_id, vk_token)
+        upload_url = get_address_vk_wall(group_id, vk_token)
         server, photo, photo_hash = upload_photo_to_server(upload_url,
                                                            image_name)
 
