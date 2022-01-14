@@ -16,7 +16,7 @@ pip install -r requirements.txt
 1. В первую очередь нужно узнать client_id приложения, которое вы уже создали по ссылкам выше. Для того, чтобы получить id нужно перейти на [страницу с приложениями](https://vk.com/apps?act=manage), и если нажать на кнопку «Редактировать» для нового приложения, в адресной строке вы увидите его client_id. Либо его можно посмотреть в настройках приложения.
 1. Затем нужно получить ключ API. Для этого в адресную строку браузера необходимо ввести ссылку, предварительно указав в ней client_id, который вы получили ранее: 
 
-`https://oauth.vk.com/authorize?client_id=[*здесь ваш client_id*]&display=page&scope=photos,groups,wall,offline&response_type=token&v=5.131`.
+`https://oauth.vk.com/authorize?client_id=<здесь ваш client_id>&display=page&scope=photos,groups,wall,offline&response_type=token&v=5.131`.
 
 Далее вы должны увидеть аналогичную страницу:
 ![comics_devman](https://user-images.githubusercontent.com/42252541/148439319-5bba535f-63b7-443c-b9d4-a6a7df90835d.png)
@@ -28,8 +28,8 @@ pip install -r requirements.txt
 
 Пример заполненного файла .env:
 ```
-VK_CLIENT_ID='Ваш ID группы'
-VK_ACCESS_TOKEN='Ваш токен для работы с API VK'
+VK_CLIENT_ID=<Ваш ID группы>
+VK_ACCESS_TOKEN=<Ваш токен для работы с API VK>
 ```
 
 ### Структура файлов
