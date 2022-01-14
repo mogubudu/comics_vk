@@ -11,7 +11,6 @@ class VkApiError(Exception):
 
 
 def check_vk_response(response):
-    response = response.json()
     if 'error' in response:
         raise VkApiError(f"Error code is {response['error']['error_code']}. "
                          f"{response['error']['error_msg']}")
@@ -29,8 +28,9 @@ def get_address_vk_wall(group_id, token):
 
     response = requests.get(url, params=params)
     response.raise_for_status()
+    response = response.json()
     check_vk_response(response)
-    return response.json()['response']['upload_url']
+    return response['response']['upload_url']
 
 
 def upload_photo_to_server(upload_url, photo_path):
@@ -40,9 +40,9 @@ def upload_photo_to_server(upload_url, photo_path):
         }
         response = requests.post(upload_url, files=files)
         response.raise_for_status()
-        check_vk_response(response)
 
     response = response.json()
+    check_vk_response(response)
     server = response['server']
     photo = response['photo']
     photo_hash = response['hash']
@@ -66,9 +66,9 @@ def save_vk_wall_photo(group_id, server, photo, photo_hash, token):
 
     response = requests.post(url, params=params)
     response.raise_for_status()
-    check_vk_response(response)
 
     response = response.json()
+    check_vk_response(response)
     owner_id = response['response'][0]['owner_id']
     media_id = response['response'][0]['id']
     return owner_id, media_id
@@ -93,6 +93,7 @@ def publish_vk_comics(group_id,
     }
     response = requests.post(url, params=params)
     response.raise_for_status()
+    response = response.json()
     check_vk_response(response)
     return response
 
