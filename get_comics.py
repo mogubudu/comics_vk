@@ -104,11 +104,11 @@ def main():
     vk_token = os.getenv('VK_ACCESS_TOKEN')
     group_id = os.getenv('VK_GROUP_ID')
 
-    try:
-        image_url, image_title = get_random_comics()
-        image_name = get_filename(image_url)
+    image_url, image_title = get_random_comics()
+    image_name = get_filename(image_url)
 
-        download_image(image_name, image_url)
+    download_image(image_name, image_url)
+    try:
         upload_url = get_vk_upload_url(group_id, vk_token)
         server, photo, photo_hash = upload_photo_to_server(upload_url,
                                                            image_name)
