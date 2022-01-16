@@ -61,7 +61,6 @@ def save_vk_wall_photo(group_id, server, photo, photo_hash, token):
         'photo': photo,
         'hash': photo_hash,
         'access_token': token,
-        'group_id': group_id,
         'v': app_version,
     }
 
